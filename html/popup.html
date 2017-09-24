@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Extension Chrome Jeedom</title>
+  	<link rel="stylesheet" type="text/css" href="../css/popup.css">
+  	<link rel="stylesheet" type="text/css" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-select.min.css">
+    <link rel="icon" type="image/png" href="../images/icon128.png">
+  </head>
+  <body>
+
+    <ul class="nav nav-tabs" role="tablist">
+      <li id="idNavJeedom" class="active"><a href="#navJeedom" role="tab" data-toggle="tab">Jeedom</a></li>
+      <li id="idNavRecherches"><a href="#navRecherches" role="tab" data-toggle="tab">Recherches&nbsp;<sub><kbd>alt+r</kbd></sub></a></li>
+      <li id="idNavLiens"><a href="#navLiens" role="tab" data-toggle="tab">Liens&nbsp;<sub><kbd>alt+l</kbd></sub></a></li>
+
+      <li id="idNavAide" class="pull-right"><a href="#navAide" role="tab" data-toggle="tab">Aide&nbsp;<sub><kbd>alt+a</kbd></sub></a></li>
+    </ul>
+
+    <!-- Contenu des onglets de navigation -->
+    <div class="tab-content">
+      <div class="tab-pane fade active in" id="navJeedom">
+        <!-- lien mon Jeedom -->
+        <div class="row" style="width:1000px;margin-top: 10px;">
+            <button id="monJeedom" class="btn btn-primary btn-sm col-sm-9" style="margin-left:15px;"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;mon Jeedom</button>
+        </div>
+        <!-- liste d'infos Jeedom -->
+      	<div id="listeJeedom">&nbsp;</div>
+      </div>
+
+      <div class="tab-pane fade" id="navRecherches">
+
+      	<!-- Recherches -->
+        <div id="idRecherches" class="panel panel-primary" style="margin-top:10px;margin-left:10px;margin-right:10px">
+          <div class="panel-heading">
+            <h3 class="panel-title">Recherches</h3>
+          </div>
+      		<div class="panel-body">
+
+            <div class="row">
+              <!-- Recherches Forum Jeedom -->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="input-group input-sm">
+                    <span class="input-group-addon input-group-style">Forum Jeedom<sub>(for)</sub></span>
+                    <input type="text" id="rechercheForum" class="form-control" placeholder="(mots clés de recherche dans le forum)">
+                    <span class="input-group-btn">
+                      <button id="rechercheForumButton" class="btn btn-primary glyphicon glyphicon-search" type="button">&nbsp;</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- fin contenu onglet Recherches -->
+
+      <div class="tab-pane fade" id="navLiens">
+
+        <div id="liens_jeedom" class="panel panel-info" style="margin-top:10px;margin-left:10px;margin-right:10px">
+          <div class="panel-heading">
+            <h3 class="panel-title">Jeedom</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="btn-group col-sm-12">
+                <button id="forumJeedom" class="btn btn-primary btn-sm col-sm-4" data-toggle="tooltip" data-placement="top" title="Lancement du Forum Jeedom"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Forum Jeedom</button>
+                <button id="siteJeedom" class="btn btn-primary btn-sm col-sm-4" data-toggle="tooltip" data-placement="top" title="Lancement du site Jeedom"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Site Jeedom</button>
+                <button id="twitterJeedom" class="btn btn-primary btn-sm col-sm-4" data-toggle="tooltip" data-placement="top" title="Lancement de la recherche Jeedom sur Twitter"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Recherche Twitter</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="btn-group col-sm-12">
+                <button id="documentationJeedom" class="btn btn-primary btn-sm col-sm-4" data-toggle="tooltip" data-placement="top" title="Affichage de la documentation Jeedom"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Doc Jeedom</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="liens_divers" class="panel panel-info" style="margin-top:10px;margin-left:10px;margin-right:10px">
+          <div class="panel-heading">
+            <h3 class="panel-title">Divers</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="btn-group col-sm-12">
+                <button id="divers1" class="btn btn-primary btn-sm col-sm-4" data-toggle="tooltip" data-placement="top" title="unused 1"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;unused 1</button>
+                <button id="divers2" class="btn btn-primary btn-sm col-sm-4" data-toggle="tooltip" data-placement="top" title="unused 2"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;unused 2</button>
+                <button id="divers3" class="btn btn-primary btn-sm col-sm-4" data-toggle="tooltip" data-placement="top" title="unused 3"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;unused 3</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="btn-group col-sm-12">
+                <button id="divers4" class="btn btn-primary btn-sm col-sm-4" data-toggle="tooltip" data-placement="top" title="unused 4"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;unused 4</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- fin contenu onglet Liens divers -->
+
+      <div class="tab-pane fade" id="navAide" style="margin-left:10px;margin-right:10px;">
+        <div class="row" style="width:1000px;margin-top: 10px;">
+            <button id="aideForum" class="btn btn-primary btn-sm col-sm-9" style="margin-left:15px;"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;Aide et remarques sur le forum Jeedom</button>
+        </div>
+        <div class="panel panel-info" style="margin-top:10px;width='1000px;'">
+          <div class="panel-heading">
+            <h3 class="panel-title">Onglet 'Jeedom'</h3>
+          </div>
+          <div class="panel-body">
+            <ul class="custom-bullet">
+              <li>Lance Jeedom (&nbsp;<kbd>mon Jeedom</kbd>&nbsp;)</li>
+              <li>Affiche des informations de Jeedom (En cours)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel panel-info" style="margin-top:10px;width='1000px;'">
+          <div class="panel-heading">
+            <h3 class="panel-title">Onglet 'Recherches'</h3>
+          </div>
+          <div class="panel-body">
+            <ul class="custom-bullet">
+              <li>Permet de faire des recherches dans le forum Jeedom</li>
+              <li>Autres recherches à venir si nécessaire</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel panel-info" style="margin-top:10px;width='1000px;'">
+          <div class="panel-heading">
+            <h3 class="panel-title">Onglet 'Liens'</h3>
+          </div>
+          <div class="panel-body">
+            <ul class="custom-bullet">
+              <li>Affiche divers liens (Contenu à compléter).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel panel-info" style="margin-top:10px;width='1000px;'">
+          <div class="panel-heading">
+            <h3 class="panel-title">Page 'Options'</h3>
+          </div>
+          <div class="panel-body">
+            <ul class="custom-bullet">
+              <li>Accessible depuis le lien <kbd>Options</kbd> en bas de la fenêtre de l'extension ou par un clic-droit sur l'ic&ocirc;ne de l'extension, puis <kbd>Options</kbd></li>
+              <li>Permet de spécifier l'url Jeedom et l'API Key Jeedom et ainsi pouvoir :</li>
+              <ul>
+                <li>afficher les éléments de son Jeedom,</li>
+                <li>lancer les interactions,</li>
+                <li>lancer les scénarios,</li>
+                <li>etc..</li>
+              </ul>
+              <li>Permet de définir le type d'affichage en retour des interactions et des scénarios (par notifications ou par alertes).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel panel-info" style="margin-top:10px;width='1000px;'">
+          <div class="panel-heading">
+            <h3 class="panel-title">Raccourcis</h3>
+          </div>
+          <div class="panel-body">
+            <ul class="custom-bullet">
+              <li>
+                <li>Lancement depuis Chrome seulement (Page de l'extension non visible)</li>
+                <ul>
+                  <li><kbd>Alt+J</kbd> : ouverture de la popup de l'extension (équivalent à la sélection du bouton Jeedom dans la barre de Chrome)</li>
+                </ul>
+              </li>
+              <li>
+                <li>Lancement lorsque l'extension est visible (et sans focus sur des champs texte)</li>
+                <ul>
+                  <li><kbd>Alt+R</kbd> : ouvre l'onglet 'Recherches'</li>
+                  <li><kbd>Alt+L</kbd> : ouvre l'onglet 'Liens divers'</li>
+                  <li><kbd>Alt+A</kbd> : ouvre l'onglet 'Aide'</li>
+                  <li><kbd>for</kbd> : ouvre l'onglet 'Recherches' et donne le focus au champ de saisie 'Forum Jeedom'</li>
+                </ul>
+              </li>
+              <li>
+                <li>Lancement depuis la page des options (et sans focus sur des champs texte)</li>
+                <ul>
+                  <li><kbd>Ctrl+S</kbd> : sauvegarde des informations Jeedom</li>
+                </ul>
+              </li>
+              <li>
+                <li>Lancement depuis n'importe quelle application (si Chrome ouvert)</li>
+                <ul>
+                  <li><kbd>Ctrl+Shift+1</kbd> : Lancement de Jeedom</li>
+                  <li><kbd>Ctrl+Shift+2</kbd> : Lancement du forum Jeedom</li>
+                  <li><kbd>Ctrl+Shift+3</kbd> : Lancement de la documentation Jeedom</li>
+                </ul>
+              </li>
+              <li>
+                <li>Lancement depuis la barre d'adresse de Chrome</li>
+                <ul>
+                  <li><kbd>j int allume la tele</kbd> : Lance l'interaction 'Allume la tele'</li>
+                  <li><kbd>j sce 52</kbd> : Lance le scénario d'id 52</li>
+                  <li><kbd>j cmd 71</kbd> : Lance la commande d'id 71</li>
+                  <li><kbd>j info 57</kbd> : Affiche l'info d'id 57</li>
+                  <li><kbd>j ifttt 43</kbd> : Lance la commande ifttt d'id 43</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- fin contenu onglet Aide -->
+    </div><!-- fin des onglets -->
+
+    <!-- bas de popup de l extension : liens vers la page des options -->
+    <div class="row">
+      <!-- Options -->
+      <div class="col-sm-4">
+        <a href="#" id="addons" class="addons"><span class="glyphicon glyphicon-cog"></span>&nbsp;Options</a>
+      </div>
+
+    </div>
+
+  <script type="text/javascript" src="../js/oXHR.js"></script>
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="../js/config.js"></script>
+	<script type="text/javascript" src="../js/mousetrap.min.js"></script>
+  <script type="text/javascript" src="../js/parametres.js"></script>
+  <script type="text/javascript" src="../js/popup.js"></script>
+
+  </body>
+</html>

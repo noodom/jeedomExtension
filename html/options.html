@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+  <title>Options Extension Jeedom</title>
+  <link rel="stylesheet" href="../css/options.css">
+  <link rel="stylesheet" type="text/css" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap-switch.min.css">
+</head>
+
+<body>
+
+  <div class="bg"></div>
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-sm-6">
+        <img src="../images/jeedomNotif.png">
+      </div>
+      <div class="col-sm-6">
+        <div class="pull-right">
+          <h1>Options</h1>
+          <p class="lead">Paramétrage de l'Extension Jeedom</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="active"><a href="#navOptions" id="ongOptions" role="tab" data-toggle="tab">Options</a></li>
+      <li><a href="#navDivers" role="tab" data-toggle="tab">Divers</a></li>
+    </ul>
+
+    <!-- Contenu des onglets de navigation -->
+    <div class="tab-content">
+      <div class="tab-pane fade active in" id="navOptions">
+        <div class="panel panel-info" style="margin-left:10px;margin-right:10px;margin-top:10px;width='1000px;'">
+          <div class="panel-heading">
+            <h3 class="panel-title">Param&eacute;trage Jeedom</h3>
+          </div>
+          <div class="panel-body">
+
+            <div class="input-group">
+              <span class="input-group-addon input-group-style">Url Jeedom</span>
+              <input type="text" id="jeedomUrl" data-id="jeedomUrl" class="form-control input-name-style">
+            </div>
+            <div class="input-group">
+              <span class="input-group-addon input-group-style">API Key</span>
+              <input type="text" id="jeedomApiKey" data-id="jeedomApiKey" class="form-control input-name-style">
+            </div>
+            <button type="button" class="btn btn-primary btn-sm col-sm-2 button-ajout" id="save_options" style="width:100%;">
+              <span class="glyphicon glyphicon-floppy-save"></span>
+              &nbsp;Enregistrer les options <kbd>ctrl+s</kbd>
+            </button>
+
+          </div>
+        </div>
+
+        <div class="panel panel-info" style="margin-left:10px;margin-right:10px;margin-top:10px;width='1000px;'">
+          <div class="panel-heading">
+            <h3 class="panel-title">Param&eacute;trage Omnibox</h3>
+          </div>
+          <div class="panel-body">
+            <div class="checkbox">
+              <label><input id="retourParNotificationCheckbox" type="checkbox" data-size="mini">&nbsp;Retour par notification</label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="navDivers">
+
+        <!-- retour en haut de page -->
+        <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Retour en haut de page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+      </div>
+
+    </div><!-- fin des onglets -->
+
+    <!-- Popup de confirmation d import au chargement de la page des options -->
+    <div class="modal fade" id="confirmationImportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-primary">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Renseignement Jeedom</h4>
+          </div>
+          <div class="modal-body">
+            <label class="control-label">
+              Vous devez renseigner l'url Jeedom et l'API Key Jeedom pour pouvoir utiliser correctement cette extension.<br><br>
+            </label>
+            <div class="alert alert-info">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;Merci de remplir ces informations dans la page d'options.
+            </div>
+          </div>
+          <div class="modal-footer">
+            <strong id="status_confirmation_import" class="label label-danger col-sm-3" style="width:300px;margin-top:16px"></strong>
+            <button type="button" data-dismiss="modal" class="btn btn-primary"><span class="glyphicon glyphicon glyphicon-ok-circle"></span>&nbsp;OK</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+  </div>
+
+
+  <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap-switch.min.js"></script>
+  <script type="text/javascript" src="../js/config.js"></script>
+  <script type="text/javascript" src="../js/mousetrap.min.js"></script>
+  <script type="text/javascript" src="../js/options.js"></script>
+  <script type="text/javascript" src="../js/jumbotron.js"></script>
+  <script type="text/javascript" src="../js/checkbox-switch.js"></script>
+
+</body>
+</html>

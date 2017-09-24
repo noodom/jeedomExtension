@@ -1,0 +1,92 @@
+body {
+	background-color: #DDD;
+	font-family: sans-serif;
+	width: 770px;
+}
+
+.nav-tabs
+ {
+   border-color:#1A3E5E;
+ }
+
+.nav-tabs > li a {
+    background-color:#CECECE;
+		border: 1px solid #1A3E5E;
+    color:#666666;
+    }
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover{
+    background-color:#9E9E9E;
+		border: 1px solid #1A3E5E;
+    border-bottom-color: transparent;
+    color:#000;
+}
+
+.nav-tabs > li > a:hover{
+  background-color: #9E9E9E !important;
+  border-radius: 5px;
+  color:#000;
+}
+
+.input-group-style {
+	width : 150px !important;
+}
+
+.custom-bullet li {
+    display: block;
+}
+
+.custom-bullet li:before
+{
+    /*Using a Bootstrap glyphicon as the bullet point*/
+		color: #CCCCCC;
+    content: "\e080";
+		float: left;
+    font-family: 'Glyphicons Halflings';
+    font-size: 9px;
+		margin-left: -17px;
+    margin-top: 4px;
+}
+
+kbd {
+	background-color:#9E9E9E !important;
+	color:#FFF !important;
+}
+
+legend.scheduler-border {
+  border: solid 1px #DDD !important;
+	border-bottom: none;
+  padding: 0 10px 10px 10px;
+}
+
+legend.scheduler-border {
+  border: none;
+  font-size: 14px;
+	width: auto !important;
+}
+
+.addons {
+	clear: both;
+    display: block;
+    margin-bottom: 4px;
+    margin-left: 10px;
+}
+
+#options {
+	display: none;
+  margin: 0 20px 10px;
+}
+
+#options ul li {
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+#options ul li input {
+    vertical-align: middle;
+}
+
+#options ul li label {
+    margin-left: 2px;
+}

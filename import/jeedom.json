@@ -1,0 +1,92 @@
+{
+  "retourParNotification": true,
+  "groupes": [
+    {
+      "libelle" : "Bureau",
+      "controles": [
+        {
+          "id": "2693",
+          "nom": "Batterie",
+          "unite": "%",
+		  "type": "commande"
+        },
+        {
+          "id": "2413",
+          "nom": "Humidite",
+          "unite": "%",
+		  "type": "commande"
+        },
+        {
+          "id": "2694",
+          "nom": "Pile",
+          "unite": "V",
+		  "type": "commande"
+        },
+        {
+          "id": "2412",
+          "nom": "Temperature",
+          "unite": "C",
+		  "type": "commande"
+        }
+      ]
+    },
+    {
+      "libelle" : "Chambre",
+      "controles": [
+        {
+          "id": "2718",
+          "nom": "Batterie",
+          "unite": "%",
+		  "type": "commande"
+        },
+        {
+          "id": "2409",
+          "nom": "Humidite",
+          "unite": "%",
+		  "type": "commande"
+        },
+        {
+          "id": "2698",
+          "nom": "Pile",
+          "unite": "V",
+		  "type": "commande"
+        },
+        {
+          "id": "2408",
+          "nom": "Temperature",
+          "unite": "C",
+		  "type": "commande"
+        }
+      ]
+    },
+    {
+      "libelle" : "Etage",
+      "controles": [
+        {
+          "id": "2717",
+          "nom": "Batterie",
+          "unite": "%",
+		  "type": "commande"
+        },
+        {
+          "id": "2713",
+          "nom": "Humidite",
+          "unite": "%",
+		  "type": "commande"
+        },
+        {
+          "id": "2715",
+          "nom": "Pile",
+          "unite": "V",
+		  "type": "commande"
+        },
+        {
+          "id": "2712",
+          "nom": "Temperature",
+          "unite": "C",
+		  "type": "commande"
+        }
+      ]
+    }
+  ]
+}

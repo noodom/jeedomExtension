@@ -1,0 +1,65 @@
+	{
+  "name": "ExtensionJeedom",
+  "description": "Extension Chrome pour consultation de Jeedom (@Noodom).",
+  "version": "0.1",
+	"options_page":"html/options.html",
+  "omnibox": { "keyword" : "j" },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs", "http://*/*", "https://*/*", "*://*/*",
+		"notifications",
+   	"webNavigation",
+   	"background",
+   	"clipboardWrite",
+   	"contextMenus"
+   ],
+  "background": {
+	"scripts": ["js/background.js", "js/config.js"]
+  },
+  "icons": {
+      "128": "images/icon128.png",
+      "48": "images/icon48.png"
+   },
+  "web_accessible_resources": [
+    "images/icon48.png"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "Extension Jeedom",
+    "default_popup": "html/popup.html"
+  },
+  "commands": {
+	  "_execute_browser_action": {
+		"suggested_key": {
+		  "default": "Alt+J",
+		  "windows": "Alt+J"
+		}
+	  },
+	  "jeedom": {
+		"suggested_key": {
+			"default": "Ctrl+Shift+1",
+			"windows": "Ctrl+Shift+1"
+        },
+        "description": "Lancement de Jeedom",
+		"global": true
+	  },
+	  "forum": {
+		"suggested_key": {
+			"default": "Ctrl+Shift+2",
+			"windows": "Ctrl+Shift+2"
+        },
+        "description": "Lancement du forum Jeedom",
+		"global": true
+	  },
+	  "documentation": {
+		"suggested_key": {
+			"default": "Ctrl+Shift+3",
+			"windows": "Ctrl+Shift+3"
+        },
+        "description": "Lancement de la documentation Jeedom",
+		"global": true
+	  }
+  },
+  "manifest_version": 2
+}
