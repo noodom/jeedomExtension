@@ -1,7 +1,7 @@
 	{
   "name": "ExtensionJeedom",
   "description": "Extension Chrome pour consultation de Jeedom (@Noodom).",
-  "version": "0.1",
+  "version": "0.2",
 	"options_page":"html/options.html",
   "omnibox": { "keyword" : "j" },
   "permissions": [
