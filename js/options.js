@@ -193,7 +193,9 @@ var Options = function(){
     console.log("enregistrement des options");
     Config.set("jeedomUrl", document.getElementById('jeedomUrl').value);
     Config.set("jeedomApiKey", document.getElementById('jeedomApiKey').value);
-  }
+    // rechargement de la page des options pour charger l'arbre Jeedom
+	  window.location.reload();
+}
 
   this.save_elements = function(){
     console.log("enregistrement des éléments Jeedom sélectionnés");
