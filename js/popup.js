@@ -1,12 +1,8 @@
-/* Extension Chrome pour Jeedom (@noodom) */
+/* Extension Chrome pour Jeedom (@Noodom) */
 
 /* TODO List
-- voir problèmes caractères spéciaux dans le fichier de config
-- interroger Jeedom pour récupérer la liste des elements Jeedom disponibles
-- ajouter la possibilité d'édition des groupes
 - import/export des elements affiches dans l'extension
 - ajouter des nouveaux type (boutons, interactions, scenarios, ifttt ..)
-- recherche/filtres sur les éléments (avec liste des possibilités affichées en live)
 - ajout de liens vers forums (lecture de la liste depuis le fichier de config)
 */
 
@@ -14,7 +10,10 @@
 // Paramètres de l'application : voir parametres.js
 //
 
+document.getElementById('helpBanner').innerHTML='Extension Chrome Jeedom - v' + version + ' - @Noodom';
+
 var listeJeedom = "";
+var listeActionsJeedom = "";
 var jsonJeedom = [];
 
 var xhttp = null;
@@ -58,6 +57,8 @@ function loadHTTPRequest(url, cfunc, indG, indE) {
 }
 
 function addBefore(nomGroupe) {
+	// initialise la liste des boutons Action
+	listeActionsJeedom = "";
 	listeJeedom += "<div id=\"idElements\" class=\"panel panel-primary\" style=\"margin-top:10px;margin-left:10px;margin-right:10px\">"
 		+ "<div class=\"panel-heading\">"
 			+ "<h3 class=\"panel-title\">" + nomGroupe+ "</h3>"
@@ -68,21 +69,32 @@ function addBefore(nomGroupe) {
 }
 
 function addAfter() {
-	// fin liste 1
+	// Ajoute les boutons Action
+	listeJeedom += "<li>" + listeActionsJeedom + "</li>";
+	listeActionsJeedom = "";
+	// Fin de l'ajout de l'élément courant
 	listeJeedom += "</ul>"
 		+ "</div>"
 		+ "</div>"
 		+ "</div>";
 }
 
-function initJeedomElement(result, iGroupe, iElement) {
-
-	if (iGroupe != -1) {
-		listeJeedom += "<li>" + jsonJeedom.groupes[iGroupe].controles[iElement].nom + " : " + result + " " + jsonJeedom.groupes[iGroupe].controles[iElement].unite + "</li>";
+function retourCommande(result, status) {
+	// TODO : voir traitement à faire après exécution action
+	if (status != -1) {
+		console.log('retour de la commande d\'action' + result);
 	}
-
 }
 
+function initJeedomElement(result, name, unite) {
+	if (name != -1) {
+		listeJeedom += '<li>' + name + ' : ' + result + ' ' + unite + '</li>';
+	}
+}
+
+ function initJeedomAction(id, name) {
+	listeActionsJeedom += '<button id="action' + id + '" class="btn btn-info btn-sm actionButton" style="margin-left:15px;"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;' + name + '</button>';
+}
 function sendMessage(msg) {
 	// A tab has be selected for the message to be sent
 	var params = {
@@ -90,7 +102,7 @@ function sendMessage(msg) {
 		currentWindow: true
 	}
 
-	// recherche de l'onglet actif dans la fenêtre Chrome courante
+	// Recherche de l'onglet actif dans la fenêtre Chrome courante
 	chrome.tabs.query(params, gotTabs);
 
 	// Onglet récupéré
@@ -159,21 +171,52 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		if (jeedomUrl != null && jeedomApiKey != null) {
 			// Construction de l onglet Jeedom
-			var nbGroupes = jsonJeedom.groupes.length;
-			// Parcours des groupes
-			for (var indGroupe=0;indGroupe<nbGroupes;indGroupe++) {
-				addBefore(jsonJeedom.groupes[indGroupe].libelle);
+			if (Config.get('jeedomElements') != null && Config.get('jeedomElements') != "null") {
+				// lecture des éléments sélectionnés dans la page des options (piece/element/cmd/id)
+				var elementsJeedom = Config.get('jeedomElements').split(',');
+				var nbElements = elementsJeedom.length;
+				// element courant 'contenu séparé par des /
+				var currentElement = "";
+				// Nom de l'element courant
+				var currentElementName = "";
+				// liste des parametres de l element courant
+				var detailElement = "";
 
-				var nbElements= jsonJeedom.groupes[indGroupe].controles.length;
-				// Parcours des elements du groupe
 				for (var indElement=0;indElement<nbElements;indElement++) {
-				    url = jeedomUrl + "/core/api/jeeApi.php?apikey=" + jeedomApiKey + "&type=cmd&id=" +
-						jsonJeedom.groupes[indGroupe].controles[indElement].id;
-						// Récupération de la valeur des champs Jeedom
-						loadHTTPRequest(url, initJeedomElement, indGroupe, indElement);
-				}
 
-				addAfter();
+					// Element courant
+					currentElement = elementsJeedom[indElement];
+					detailElement = currentElement.split('/');
+
+					// ex : info/Chambre/Thermostat/Consigne/2537/°C
+					console.log ('ajout de ' + elementsJeedom[indElement] + ' : ' + currentElementName + '--' +detailElement[detailElement.length-4]);
+					if (indElement != 0 && currentElementName != detailElement[detailElement.length-5]+'//'+detailElement[detailElement.length-4]) {
+						currentElement = detailElement[detailElement.length-4];
+						addAfter();
+					}
+
+
+					if (currentElementName != detailElement[detailElement.length-5]+'//'+detailElement[detailElement.length-4]) {
+						currentElementName = detailElement[detailElement.length-5]+'//'+detailElement[detailElement.length-4];
+						addBefore('[' + detailElement[detailElement.length-5]+'] '+detailElement[detailElement.length-4]);
+					}
+
+					// Prise en compte du type de l'élément Jeedom
+					if (detailElement[detailElement.length-6] == 'info') {
+						// type info
+						url = jeedomUrl + "/core/api/jeeApi.php?apikey=" + jeedomApiKey + "&type=cmd&id=" +
+						detailElement[detailElement.length-2];
+						// Récupération de la valeur des champs Jeedom
+						loadHTTPRequest(url, initJeedomElement, detailElement[detailElement.length-3], detailElement[detailElement.length-1]);
+					}
+					else if (detailElement[detailElement.length-6] == 'action') {
+						// type action : affichage du bouton de commande
+						initJeedomAction(detailElement[detailElement.length-2], detailElement[detailElement.length-3]);
+					}
+				}
+				if (nbElements > 0) {
+					addAfter();
+				}
 			}
 
 			document.getElementById('listeJeedom').innerHTML=listeJeedom;
@@ -183,31 +226,13 @@ document.addEventListener('DOMContentLoaded', function() {
 	function executerRequete(callback) {
 		// on vérifie si la liste des elements a déjà été chargée pour n'exécuter la requête AJAX qu'une seule fois
 		// (A voir pour optimisation future : utilisation de sessionElements)
-		if (localStorage.getItem('sessionElements') != null && localStorage.getItem('sessionElements') != "null") {
+		if (Config.get('sessionElements') != null && Config.get('sessionElements') != "null") {
 			jsonJeedom = JSON.parse(localStorage.getItem('sessionElements'));
 			callback();
 		}
 		else {
-			if (jsonJeedom.length === 0) {
-				// on récupère un objet XMLHttpRequest
-				var xhr = getXMLHttpRequest();
-				// on réagit à l'événement onreadystatechange
-				xhr.onreadystatechange = function() {
-					// test du statut de retour de la requête AJAX
-					if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-						// on désérialise les parametres et on le sauvegarde dans une variable
-						jsonJeedom = JSON.parse(xhr.responseText);
-						// on lance la fonction de callback avec les parametres récupérés
-						callback();
-					}
-				}
-				// la requête AJAX : lecture des parametres (depuis jeedom.json)
-				xhr.open("GET", jeedomFile, true);
-				xhr.send();
-			} else {
 				// On lance la fonction de callback avec les parametres déjà récupérés précédemment
 				callback();
-			}
 		}
 	}
 
@@ -217,8 +242,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		window.location = window.location;
 	}
 
-	// On initialise les données de l extension à partir du fichier /import/jeedom.json
-	executerRequete(initialisationDonnees);
+	// On initialise les données Jeedom
+	initialisationDonnees();
 
 	// Voir pour une utilisation future
 	chrome.browserAction.setBadgeText ( { text: "" } );
@@ -282,6 +307,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	var documentationJeedomButton = document.getElementById('documentationJeedom');
 	documentationJeedomButton.addEventListener('click', function() {
 		selectionLien('https://jeedom.github.io/documentation/', 'Lancement de la documentation Jeedom');
+	}, false);
+
+	var githubJeedomButton = document.getElementById('githubJeedom');
+	githubJeedomButton.addEventListener('click', function() {
+		selectionLien('https://www.github.com/jeedom/', 'Lancement du github Jeedom');
 	}, false);
 
 	////////////////
@@ -368,4 +398,12 @@ document.addEventListener('DOMContentLoaded', function() {
 		return false;
 	});
 
+	$('.actionButton').click(function() {
+	     // traitement de la commande actionXXX (XXX : id de la commande a exécuter)
+			 if (this.id.substring(0,6) == 'action') {
+				 var idCmd = this.id.substring(6);
+				 var url = jeedomUrl + "/core/api/jeeApi.php?apikey=" + jeedomApiKey + "&type=cmd&id=" + idCmd;
+			 	loadHTTPRequest(url, retourCommande, status);
+			 }
+	 })
 }, false);

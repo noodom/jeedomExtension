@@ -1,5 +1,4 @@
-// version de l'extension
-var version = 0.1;
+// Paramètres de l'extension
 
-// fichier de configuration
-var jeedomFile = '/import/jeedom.json';
+// version de l'extension
+var version = '0.2';

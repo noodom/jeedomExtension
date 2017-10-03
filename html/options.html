@@ -3,8 +3,16 @@
 <head>
   <title>Options Extension Jeedom</title>
   <link rel="stylesheet" href="../css/options.css">
-  <link rel="stylesheet" type="text/css" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="../css/bootstrap-switch.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../css/bootstrap-switch.min.css"> -->
+  <!-- treeview -->
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap-treeview.min.css">
+  <link rel="stylesheet" href="../css/jquery.tree-multiselect.min.css">
+
+  <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="../js/jquery.tree-multiselect.js"></script>
+
 </head>
 
 <body>
@@ -66,6 +74,21 @@
           </div>
         </div>
 
+        <div class="panel panel-info" style="margin-left:10px;margin-right:10px;margin-top:10px;width='1000px;'">
+          <div class="panel-heading">
+            <h3 class="panel-title">Param&eacute;trage des éléments Jeedom</h3>
+          </div>
+          <div class="panel-body">
+            <button type="button" class="btn btn-primary btn-sm col-sm-2 button-ajout" id="save_elements" style="width:100%;">
+              <span class="glyphicon glyphicon-floppy-save"></span>
+              &nbsp;Enregistrer les éléments <kbd>ctrl+e</kbd>
+            </button>
+            <div id="jeedomTree">&nbsp;</div>
+              <select id="jeedomSelection" multiple="multiple">
+              </select>
+          </div>
+        </div>
+
       </div>
       <div class="tab-pane fade" id="navDivers">
 
@@ -102,14 +125,13 @@
   </div>
 
 
-  <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="../js/bootstrap-switch.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <!-- <script type="text/javascript" src="../js/bootstrap-switch.min.js"></script> -->
   <script type="text/javascript" src="../js/config.js"></script>
   <script type="text/javascript" src="../js/mousetrap.min.js"></script>
   <script type="text/javascript" src="../js/options.js"></script>
   <script type="text/javascript" src="../js/jumbotron.js"></script>
-  <script type="text/javascript" src="../js/checkbox-switch.js"></script>
+  <!-- <script type="text/javascript" src="../js/checkbox-switch.js"></script> -->
 
 </body>
 </html>
